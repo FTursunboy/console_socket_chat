@@ -19,6 +19,7 @@ class App
         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
         $dotenv->load();
 
+
         $config = new Config($_ENV['CONFIG_PATH']);
 
         $this->container = new Container([

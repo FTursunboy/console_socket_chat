@@ -79,12 +79,17 @@ class SocketManager
 
     public function bind(): self
     {
+        if (!file_exists(dirname($this->socketPath))) {
+            mkdir(dirname($this->socketPath), 0777, true);
+        }
+
         if (socket_bind($this->socket, $this->socketPath) === false) {
             throw new Exception("socket_bind() failed: reason: " . socket_strerror(socket_last_error($this->socket)));
         }
 
         return $this;
     }
+
 
     public function connect(): self
     {
